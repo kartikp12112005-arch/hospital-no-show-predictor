@@ -1,0 +1,31 @@
+{
+  "gender_distribution": {
+    "F": 71839,
+    "M": 38687
+  },
+  "age_distribution": {
+    "0-12": 17497,
+    "13-18": 7830,
+    "19-30": 16765,
+    "31-45": 21954,
+    "46-60": 23179,
+    "60+": 19762
+  },
+  "disease_distribution": {
+    "Hypertension": 21801,
+    "Diabetes": 7943,
+    "Alcoholism": 3360,
+    "Handicap": 2241
+  },
+  "attendance_rate_overall": 79.81,
+  "sms_effect": {
+    "0": 83.3,
+    "1": 72.43
+  },
+  "monthly_trend": {
+    "2016-04": 80.43,
+    "2016-05": 79.21,
+    "2016-06": 81.54
+  },
+  "total_records": 110526
+}

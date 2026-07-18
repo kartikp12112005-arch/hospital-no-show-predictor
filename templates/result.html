@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Prediction Result | MediPredict{% endblock %}
+
+{% block breadcrumb %}
+<div class="container">
+    <nav aria-label="breadcrumb" class="breadcrumb-bar">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('predict') }}">Predict</a></li>
+            <li class="breadcrumb-item active">Result</li>
+        </ol>
+    </nav>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+
+            <div class="result-card text-center {{ 'result-high-risk' if result.risk_level == 'High Risk' else 'result-low-risk' }}">
+                <i class="bi {{ 'bi-exclamation-triangle-fill' if result.risk_level == 'High Risk' else 'bi-check-circle-fill' }} result-icon"></i>
+                <h6 class="text-uppercase result-eyebrow">Prediction Result</h6>
+                <h1 class="result-title">{{ result.prediction }}</h1>
+                <span class="badge risk-badge {{ 'bg-danger' if result.risk_level == 'High Risk' else 'bg-success' }}">
+                    {{ result.risk_level }}
+                </span>
+
+                <div class="confidence-block mt-4">
+                    <p class="mb-1 text-muted">Confidence Score</p>
+                    <h2 class="confidence-num">{{ result.confidence }}%</h2>
+                </div>
+
+                <div class="row mt-4 g-3 probability-row">
+                    <div class="col-6">
+                        <div class="prob-box">
+                            <p class="mb-1 text-muted small">Probability of Attending</p>
+                            <h4 class="text-success">{{ result.probability_attend }}%</h4>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="prob-box">
+                            <p class="mb-1 text-muted small">Probability of No-Show</p>
+                            <h4 class="text-danger">{{ result.probability_no_show }}%</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart.js probability graph rendered here in Step 6 -->
+                <div class="mt-4">
+                    <canvas id="probabilityChart" height="120"
+                            data-attend="{{ result.probability_attend }}"
+                            data-noshow="{{ result.probability_no_show }}"></canvas>
+                </div>
+            </div>
+
+            <div class="recommendation-card mt-4">
+                <h5><i class="bi bi-lightbulb me-2"></i>Recommendation</h5>
+                {% if result.risk_level == 'High Risk' %}
+                <p>
+                    This patient has a <strong>high probability of missing</strong> the appointment.
+                    Consider sending an additional SMS/phone reminder 24-48 hours before the visit,
+                    calling to confirm attendance, or scheduling a backup patient in the same slot.
+                </p>
+                {% else %}
+                <p>
+                    This patient is <strong>likely to attend</strong> the appointment as scheduled.
+                    Standard reminder procedures should be sufficient — no additional intervention needed.
+                </p>
+                {% endif %}
+            </div>
+
+            <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+                <a href="{{ url_for('predict') }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-repeat me-2"></i>New Prediction
+                </a>
+                <button class="btn btn-primary-gradient" id="downloadReportBtn" type="button">
+                    <i class="bi bi-file-earmark-pdf me-2"></i>Download PDF Report
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

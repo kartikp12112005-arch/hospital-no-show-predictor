@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block title %}About | MediPredict{% endblock %}
+
+{% block breadcrumb %}
+<div class="container">
+    <nav aria-label="breadcrumb" class="breadcrumb-bar">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active">About</li>
+        </ol>
+    </nav>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+
+    <div class="text-center mb-5">
+        <h2 class="section-title">About This Project</h2>
+        <p class="text-muted col-lg-8 mx-auto">
+            Smart Hospital No-Show Prediction & Management System — a full-stack ML application
+            that predicts whether a patient will attend or miss a scheduled hospital appointment.
+        </p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="about-card">
+                <h5><i class="bi bi-exclamation-circle me-2 text-danger"></i>Problem Statement</h5>
+                <p class="text-muted">
+                    No-shows are a persistent problem in healthcare: patients book appointments and
+                    simply don't come, wasting staff time and blocking slots other patients could
+                    have used. Hospitals typically only discover a no-show <em>after</em> the
+                    appointment time has already passed.
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="about-card">
+                <h5><i class="bi bi-lightbulb me-2 text-warning"></i>Solution</h5>
+                <p class="text-muted">
+                    MediPredict trains a machine learning classifier on historical appointment data
+                    and predicts, <em>before</em> the appointment, the probability a given patient
+                    will miss it — based on demographics, chronic conditions, SMS reminders, and
+                    waiting time. Hospital staff can then prioritize follow-up for high-risk patients.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="about-card mt-4">
+        <h5><i class="bi bi-database me-2 text-primary"></i>Dataset</h5>
+        <p class="text-muted mb-2">
+            The model is trained on the public Kaggle <strong>"Medical Appointment No Shows"</strong>
+            dataset — over 110,000 real outpatient appointment records from Brazil, including patient
+            age, gender, chronic conditions (hypertension, diabetes, alcoholism, handicap), scholarship
+            status, SMS reminder status, and the gap between booking and appointment dates.
+        </p>
+        <div class="row text-center g-3 mt-2">
+            <div class="col-md-3 col-6">
+                <div class="mini-stat-card"><i class="bi bi-file-earmark-spreadsheet"></i><h3>110K+</h3><p>Raw Records</p></div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="mini-stat-card"><i class="bi bi-columns-gap"></i><h3>14</h3><p>Original Columns</p></div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="mini-stat-card"><i class="bi bi-funnel"></i><h3>9</h3><p>Engineered Features</p></div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="mini-stat-card"><i class="bi bi-geo-alt"></i><h3>Brazil</h3><p>Data Source Region</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="about-card mt-4">
+        <h5><i class="bi bi-cpu me-2 text-success"></i>Machine Learning Algorithms</h5>
+        <p class="text-muted">Four candidate classifiers were trained and automatically compared on Accuracy, Precision, Recall, F1 Score, and ROC-AUC:</p>
+        <div class="table-responsive">
+            <table class="table table-sm align-middle">
+                <thead><tr><th>Model</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th><th>ROC-AUC</th></tr></thead>
+                <tbody>
+                {% if metadata and metadata.all_results %}
+                    {% for name, m in metadata.all_results.items() %}
+                    <tr class="{{ 'table-success' if name == metadata.best_model else '' }}">
+                        <td>{{ name }} {% if name == metadata.best_model %}<i class="bi bi-star-fill text-warning ms-1"></i>{% endif %}</td>
+                        <td>{{ m.accuracy }}</td>
+                        <td>{{ m.precision }}</td>
+                        <td>{{ m.recall }}</td>
+                        <td>{{ m.f1_score }}</td>
+                        <td>{{ m.roc_auc }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr><td colspan="6" class="text-center text-muted">Model has not been trained yet.</td></tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+        {% if metadata %}
+        <p class="text-muted small mb-0"><i class="bi bi-star-fill text-warning me-1"></i>{{ metadata.best_model }} was automatically selected as the best-performing model.</p>
+        {% endif %}
+    </div>
+
+    <div class="about-card mt-4">
+        <h5><i class="bi bi-stack me-2 text-info"></i>Technology Stack</h5>
+        <div class="row g-3 text-muted">
+            <div class="col-md-3"><strong>Frontend:</strong> HTML5, CSS3, Bootstrap 5, JavaScript</div>
+            <div class="col-md-3"><strong>Backend:</strong> Python, Flask</div>
+            <div class="col-md-3"><strong>Machine Learning:</strong> Scikit-learn, Pandas, NumPy</div>
+            <div class="col-md-3"><strong>Database:</strong> SQLite</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

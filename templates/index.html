@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+{% block title %}Home | MediPredict — Hospital No-Show Predictor{% endblock %}
+
+{% block content %}
+
+<!-- ===================== HERO ===================== -->
+<section class="hero-section">
+    <div class="container py-5">
+        <div class="row align-items-center gy-4">
+            <div class="col-lg-7">
+                <span class="badge hero-badge mb-3"><i class="bi bi-cpu me-1"></i>Machine Learning Powered</span>
+                <h1 class="hero-title">Predict Patient No-Shows <span class="text-gradient">Before They Happen</span></h1>
+                <p class="hero-subtitle">
+                    Hospitals lose valuable time and resources when patients book appointments but never show up.
+                    MediPredict uses a trained ML model to flag high-risk appointments in advance, so staff can
+                    intervene with reminders, overbooking strategies, or follow-up calls.
+                </p>
+                <div class="d-flex flex-wrap gap-3 mt-4">
+                    <a href="{{ url_for('predict') }}" class="btn btn-primary-gradient btn-lg">
+                        <i class="bi bi-clipboard2-pulse me-2"></i>Try a Prediction
+                    </a>
+                    <a href="#how-it-works" class="btn btn-outline-secondary btn-lg">
+                        <i class="bi bi-diagram-3 me-2"></i>See How It Works
+                    </a>
+                </div>
+                <div class="d-flex gap-4 mt-5 hero-stats">
+                    <div><span class="stat-num">110K+</span><span class="stat-label">Records Trained</span></div>
+                    <div><span class="stat-num">4</span><span class="stat-label">ML Models Compared</span></div>
+                    <div><span class="stat-num">72%</span><span class="stat-label">ROC-AUC Score</span></div>
+                </div>
+            </div>
+            <div class="col-lg-5 text-center">
+                <div class="hero-visual">
+                    <i class="bi bi-hospital hero-icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== ABOUT PROJECT ===================== -->
+<section class="section-block">
+    <div class="container">
+        <div class="row align-items-center gy-4">
+            <div class="col-lg-6">
+                <h6 class="eyebrow">About the Project</h6>
+                <h2 class="section-title">Turning Appointment Data Into Actionable Insight</h2>
+                <p class="text-muted">
+                    Missed appointments cost hospitals staff time, block slots that other patients could have used,
+                    and disrupt care schedules. MediPredict analyzes patient and appointment attributes — age,
+                    gender, chronic conditions, SMS reminders, and waiting time — to estimate the probability
+                    that a given appointment will be missed, giving hospital staff a chance to act early.
+                </p>
+                <ul class="checklist">
+                    <li><i class="bi bi-check-circle-fill"></i> Real historical dataset (110,000+ Brazilian outpatient appointments)</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Four ML models trained and automatically compared</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Full admin dashboard with analytics and history</li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="mini-stat-card">
+                            <i class="bi bi-graph-up-arrow"></i>
+                            <h3>4</h3>
+                            <p>Models Trained</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mini-stat-card">
+                            <i class="bi bi-people"></i>
+                            <h3>110K+</h3>
+                            <p>Patient Records</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mini-stat-card">
+                            <i class="bi bi-shield-check"></i>
+                            <h3>100%</h3>
+                            <p>Free & Open Stack</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mini-stat-card">
+                            <i class="bi bi-lightning-charge"></i>
+                            <h3>&lt;1s</h3>
+                            <p>Prediction Time</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== FEATURES ===================== -->
+<section class="section-block bg-soft">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h6 class="eyebrow">Features</h6>
+            <h2 class="section-title">Everything a Hospital Team Needs</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="bi bi-clipboard2-pulse"></i></div>
+                    <h5>Instant Risk Prediction</h5>
+                    <p>Enter patient details and get an instant Attend / No-Show prediction with a confidence score.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="bi bi-speedometer2"></i></div>
+                    <h5>Live Dashboard</h5>
+                    <p>Track total predictions, attendance rates, and recent activity from a single admin dashboard.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="bi bi-bar-chart-line"></i></div>
+                    <h5>Deep Analytics</h5>
+                    <p>Visualize gender, age, disease, and SMS-reminder effects on attendance with interactive charts.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="bi bi-clock-history"></i></div>
+                    <h5>Searchable History</h5>
+                    <p>Every prediction is logged to SQLite — searchable, exportable to CSV, and deletable by admins.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="bi bi-shield-lock"></i></div>
+                    <h5>Secure Admin Access</h5>
+                    <p>Password-hashed admin authentication protects dashboard, analytics, and history pages.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="bi bi-phone"></i></div>
+                    <h5>Fully Responsive</h5>
+                    <p>Works cleanly on desktop, tablet, and mobile — built with Bootstrap 5's responsive grid.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== ML WORKFLOW ===================== -->
+<section class="section-block" id="how-it-works">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h6 class="eyebrow">Under the Hood</h6>
+            <h2 class="section-title">The Machine Learning Workflow</h2>
+        </div>
+        <div class="workflow-row">
+            <div class="workflow-step">
+                <div class="workflow-icon"><i class="bi bi-database-fill-down"></i></div>
+                <span class="workflow-num">1</span>
+                <h6>Data Cleaning</h6>
+                <p>Fix column typos, parse dates, remove invalid ages & duplicates.</p>
+            </div>
+            <div class="workflow-arrow"><i class="bi bi-arrow-right"></i></div>
+            <div class="workflow-step">
+                <div class="workflow-icon"><i class="bi bi-tools"></i></div>
+                <span class="workflow-num">2</span>
+                <h6>Feature Engineering</h6>
+                <p>Derive waiting days, encode gender, align features to the web form.</p>
+            </div>
+            <div class="workflow-arrow"><i class="bi bi-arrow-right"></i></div>
+            <div class="workflow-step">
+                <div class="workflow-icon"><i class="bi bi-cpu"></i></div>
+                <span class="workflow-num">3</span>
+                <h6>Model Training</h6>
+                <p>Train Logistic Regression, Decision Tree, Random Forest & Gradient Boosting.</p>
+            </div>
+            <div class="workflow-arrow"><i class="bi bi-arrow-right"></i></div>
+            <div class="workflow-step">
+                <div class="workflow-icon"><i class="bi bi-clipboard2-check"></i></div>
+                <span class="workflow-num">4</span>
+                <h6>Evaluation</h6>
+                <p>Compare Accuracy, Precision, Recall, F1 & ROC-AUC to pick the best model.</p>
+            </div>
+            <div class="workflow-arrow"><i class="bi bi-arrow-right"></i></div>
+            <div class="workflow-step">
+                <div class="workflow-icon"><i class="bi bi-rocket-takeoff"></i></div>
+                <span class="workflow-num">5</span>
+                <h6>Deployment</h6>
+                <p>Best model saved with joblib and served live through Flask.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== TECHNOLOGIES ===================== -->
+<section class="section-block bg-soft">
+    <div class="container text-center">
+        <h6 class="eyebrow">Technologies</h6>
+        <h2 class="section-title mb-4">Built With a 100% Free Stack</h2>
+        <div class="tech-badges">
+            <span class="tech-badge"><i class="bi bi-filetype-py"></i> Python</span>
+            <span class="tech-badge"><i class="bi bi-lightning"></i> Flask</span>
+            <span class="tech-badge"><i class="bi bi-diagram-3"></i> Scikit-learn</span>
+            <span class="tech-badge"><i class="bi bi-table"></i> Pandas</span>
+            <span class="tech-badge"><i class="bi bi-calculator"></i> NumPy</span>
+            <span class="tech-badge"><i class="bi bi-bootstrap"></i> Bootstrap 5</span>
+            <span class="tech-badge"><i class="bi bi-bar-chart"></i> Chart.js</span>
+            <span class="tech-badge"><i class="bi bi-database"></i> SQLite</span>
+            <span class="tech-badge"><i class="bi bi-git"></i> Git</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<section class="cta-section">
+    <div class="container text-center">
+        <h2>Ready to See It In Action?</h2>
+        <p class="mb-4">Run a live prediction using the same model trained on real hospital appointment data.</p>
+        <a href="{{ url_for('predict') }}" class="btn btn-light btn-lg">
+            <i class="bi bi-clipboard2-pulse me-2"></i>Start Predicting
+        </a>
+    </div>
+</section>
+
+{% endblock %}

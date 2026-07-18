@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}Predict Appointment | MediPredict{% endblock %}
+
+{% block breadcrumb %}
+<div class="container">
+    <nav aria-label="breadcrumb" class="breadcrumb-bar">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active">Predict Appointment</li>
+        </ol>
+    </nav>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-4">
+                <h2 class="section-title">Predict Appointment Attendance</h2>
+                <p class="text-muted">Fill in the patient and appointment details below to get an instant risk prediction.</p>
+            </div>
+
+            <div class="form-card">
+                <form method="POST" action="{{ url_for('predict') }}" id="predictForm" class="row g-4">
+
+                    <div class="col-12">
+                        <h6 class="form-section-label"><i class="bi bi-person-badge me-2"></i>Patient Details</h6>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label"><i class="bi bi-gender-ambiguous me-1"></i>Gender</label>
+                        <select name="gender" class="form-select" required>
+                            <option value="F" selected>Female</option>
+                            <option value="M">Male</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label"><i class="bi bi-calendar3 me-1"></i>Age</label>
+                        <input type="number" name="age" class="form-control" min="0" max="120" placeholder="e.g. 45" required>
+                    </div>
+
+                    <div class="col-12">
+                        <h6 class="form-section-label mt-2"><i class="bi bi-heart-pulse me-2"></i>Health Conditions</h6>
+                    </div>
+
+                    <div class="col-md-3 col-6">
+                        <div class="check-tile">
+                            <input type="checkbox" name="hypertension" value="1" class="form-check-input" id="hyp">
+                            <label class="form-check-label" for="hyp"><i class="bi bi-activity me-1"></i>Hypertension</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="check-tile">
+                            <input type="checkbox" name="diabetes" value="1" class="form-check-input" id="dia">
+                            <label class="form-check-label" for="dia"><i class="bi bi-droplet-half me-1"></i>Diabetes</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="check-tile">
+                            <input type="checkbox" name="alcoholism" value="1" class="form-check-input" id="alc">
+                            <label class="form-check-label" for="alc"><i class="bi bi-cup-straw me-1"></i>Alcoholism</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="check-tile">
+                            <input type="checkbox" name="scholarship" value="1" class="form-check-input" id="sch">
+                            <label class="form-check-label" for="sch"><i class="bi bi-mortarboard me-1"></i>Scholarship</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label"><i class="bi bi-person-wheelchair me-1"></i>Handicap Level (0-4)</label>
+                        <input type="number" name="handicap" class="form-control" min="0" max="4" value="0">
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="check-tile mt-4">
+                            <input type="checkbox" name="sms_received" value="1" class="form-check-input" id="sms">
+                            <label class="form-check-label" for="sms"><i class="bi bi-chat-dots me-1"></i>SMS Reminder Received</label>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <h6 class="form-section-label mt-2"><i class="bi bi-calendar-event me-2"></i>Appointment Details</h6>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label"><i class="bi bi-hourglass-split me-1"></i>Waiting Days (days between booking and appointment)</label>
+                        <input type="number" name="waiting_days" class="form-control" min="0" max="365" placeholder="e.g. 14" required>
+                    </div>
+
+                    <div class="col-12 text-center mt-4">
+                        <button type="submit" class="btn btn-primary-gradient btn-lg px-5" id="predictSubmitBtn">
+                            <span class="btn-label"><i class="bi bi-magic me-2"></i>Predict Attendance</span>
+                            <span class="btn-spinner d-none">
+                                <span class="spinner-border spinner-border-sm me-2" role="status"></span>Analyzing...
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <p class="text-center text-muted small mt-3">
+                <i class="bi bi-shield-check me-1"></i>Prediction is generated locally by a trained scikit-learn model — no data leaves this server.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

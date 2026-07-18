@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Model Comparison | MediPredict{% endblock %}
+
+{% block breadcrumb %}
+<div class="container">
+    <nav aria-label="breadcrumb" class="breadcrumb-bar">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li class="breadcrumb-item active">Model Comparison</li>
+        </ol>
+    </nav>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h2 class="section-title mb-1">Model Comparison</h2>
+    <p class="text-muted mb-4">How the four candidate models performed on the held-out test set.</p>
+
+    {% if not metadata %}
+        <div class="alert alert-warning"><i class="bi bi-exclamation-triangle me-2"></i>No trained model found. Run <code>python model/train.py</code> first.</div>
+    {% else %}
+        <div class="chart-card mb-4">
+            <h6><i class="bi bi-bar-chart-line me-2"></i>Metric Comparison</h6>
+            <canvas id="modelComparisonChart" data-results='{{ metadata.all_results | tojson }}'></canvas>
+        </div>
+
+        <div class="table-card">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Accuracy</th>
+                        <th>Precision</th>
+                        <th>Recall</th>
+                        <th>F1 Score</th>
+                        <th>ROC-AUC</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for name, m in metadata.all_results.items() %}
+                    <tr class="{{ 'table-success' if name == metadata.best_model else '' }}">
+                        <td>{{ name }}</td>
+                        <td>{{ m.accuracy }}</td>
+                        <td>{{ m.precision }}</td>
+                        <td>{{ m.recall }}</td>
+                        <td>{{ m.f1_score }}</td>
+                        <td>{{ m.roc_auc }}</td>
+                        <td>
+                            {% if name == metadata.best_model %}
+                            <span class="badge bg-success"><i class="bi bi-star-fill me-1"></i>Best Model</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-1">
+            <div class="col-md-4">
+                <div class="mini-stat-card">
+                    <i class="bi bi-trophy"></i>
+                    <h3>{{ metadata.best_model }}</h3>
+                    <p>Selected Model</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mini-stat-card">
+                    <i class="bi bi-database-check"></i>
+                    <h3>{{ metadata.trained_rows }}</h3>
+                    <p>Training Rows</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mini-stat-card">
+                    <i class="bi bi-clipboard2-check"></i>
+                    <h3>{{ metadata.test_rows }}</h3>
+                    <p>Test Rows</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

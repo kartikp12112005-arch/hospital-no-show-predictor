@@ -1,0 +1,11 @@
+Flask==3.0.3
+Werkzeug==3.0.3
+pandas==2.2.2
+numpy==2.2.4
+scikit-learn==1.8.0
+joblib==1.4.2
+matplotlib==3.9.1
+seaborn==0.13.2
+gunicorn==22.0.0
+python-dotenv==1.0.1
+reportlab==4.2.2

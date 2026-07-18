@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Admin Login | MediPredict{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+            <div class="login-card">
+                <div class="text-center mb-4">
+                    <i class="bi bi-shield-lock login-icon"></i>
+                    <h3 class="mt-3">Admin Login</h3>
+                    <p class="text-muted small">Access the dashboard, analytics, and prediction history.</p>
+                </div>
+
+                <form method="POST" action="{{ url_for('login') }}">
+                    <div class="mb-3">
+                        <label class="form-label"><i class="bi bi-person me-1"></i>Username</label>
+                        <input type="text" name="username" class="form-control" placeholder="admin" required autofocus>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label"><i class="bi bi-key me-1"></i>Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary-gradient w-100 mt-2">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                    </button>
+                </form>
+
+                <div class="demo-creds mt-4">
+                    <i class="bi bi-info-circle me-1"></i>
+                    Default seeded credentials: <code>admin</code> / <code>Admin@123</code>
+                    <br><span class="text-muted">Change these immediately in a production deployment.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+# Render Blueprint — Smart Hospital No-Show Prediction & Management System
+#
+# Deploy: https://render.com/docs/blueprint-spec
+# Push this repo to GitHub, then in Render: New -> Blueprint -> select the repo.
+#
+# IMPORTANT: trained_models/*.pkl and database/*.db are gitignored (per
+# project convention — never commit binary model/db artifacts). That means
+# the model must be (re)trained during the build step on every deploy,
+# which is why buildCommand includes `python model/train.py`.
+
+services:
+  - type: web
+    name: hospital-no-show-predictor
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt && python model/train.py"
+    startCommand: "gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: PYTHON_VERSION
+        value: 3.12.3
+    autoDeploy: true

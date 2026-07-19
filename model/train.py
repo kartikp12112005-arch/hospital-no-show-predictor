@@ -1,15 +1,4 @@
-"""
-Model training pipeline.
 
-Loads the raw dataset, cleans it, engineers features, trains four
-candidate models (Logistic Regression, Decision Tree, Random Forest,
-Gradient Boosting), compares them on Accuracy/Precision/Recall/F1/ROC-AUC,
-saves the best-performing model + scaler to trained_models/, and writes
-comparison metrics + EDA artifacts for the web app to display.
-
-Run directly from the project root:
-    python model/train.py
-"""
 
 import json
 import os
@@ -23,9 +12,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.utils.class_weight import compute_sample_weight
 
-# Allow running this file directly (python model/train.py) as well as
-# as a module (python -m model.train) by ensuring the project root is
-# on sys.path either way.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
@@ -103,12 +89,7 @@ def main():
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
 
-    # GradientBoostingClassifier has no class_weight parameter, unlike the
-    # other three models. Without balancing, it just learns to always
-    # predict the majority class ("Attend") and looks falsely strong on
-    # accuracy/ROC-AUC while being useless in practice (near-zero recall
-    # on the "No-Show" class we actually care about catching). We
-    # replicate class_weight='balanced' manually via sample_weight.
+  
     balanced_sample_weight = compute_sample_weight(class_weight="balanced", y=y_train)
 
     results = {}
@@ -126,10 +107,7 @@ def main():
         print(f"        -> {metrics}")
 
     print("\n[6/6] Comparing models and saving the best one...")
-    # Selection uses F1 score rather than ROC-AUC: F1 balances precision
-    # and recall, which matters far more for a no-show ALERT system than
-    # a threshold-independent ranking metric. A model that is "accurate"
-    # but never flags an actual no-show is not useful to hospital staff.
+  
     best_name = max(results, key=lambda n: results[n]["f1_score"])
     best_model = fitted_models[best_name]
     print(

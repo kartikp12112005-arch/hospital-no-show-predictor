@@ -1,9 +1,3 @@
-"""
-Model evaluation module.
-
-Computes the standard classification metrics used to compare
-candidate models: Accuracy, Precision, Recall, F1 Score, and ROC-AUC.
-"""
 
 from sklearn.metrics import (
     accuracy_score,
@@ -15,17 +9,7 @@ from sklearn.metrics import (
 
 
 def evaluate_model(model, X_test, y_test) -> dict:
-    """
-    Evaluate a fitted classifier on held-out test data.
 
-    Args:
-        model: A fitted scikit-learn classifier with predict/predict_proba.
-        X_test: Scaled test features.
-        y_test: True test labels.
-
-    Returns:
-        Dict of rounded metric values.
-    """
     y_pred = model.predict(X_test)
     y_proba = model.predict_proba(X_test)[:, 1]
 

@@ -1,10 +1,4 @@
-/* ==========================================================================
-   Smart Hospital No-Show Predictor — main.js
-   Handles: dark mode toggle, predict-form UX, scroll reveals, and every
-   Chart.js visualization across Result / Dashboard / Analytics / Model
-   Comparison pages. Every function guards on element existence so this
-   single file can safely run on every page.
-   ========================================================================== */
+
 
 document.addEventListener("DOMContentLoaded", () => {
     initDarkMode();
@@ -18,10 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initAnalyticsCharts();
     initModelComparisonChart();
 });
-
-/* --------------------------------------------------------------------
-   Dark mode toggle — preference persisted in localStorage
-   -------------------------------------------------------------------- */
+ 
 function initDarkMode() {
     const toggleBtn = document.getElementById("darkModeToggle");
     const root = document.documentElement;
@@ -51,12 +42,7 @@ function initDarkMode() {
         });
     }
 }
-
-/* --------------------------------------------------------------------
-   Predict form: loading spinner + basic client-side validation feedback.
-   Server-side validation (utils/validators.py) remains authoritative;
-   this only improves perceived responsiveness.
-   -------------------------------------------------------------------- */
+ 
 function initPredictFormUX() {
     const form = document.getElementById("predictForm");
     const submitBtn = document.getElementById("predictSubmitBtn");
@@ -74,10 +60,7 @@ function initPredictFormUX() {
         // Form still submits normally (full page reload to /predict).
     });
 }
-
-/* --------------------------------------------------------------------
-   Fade/slide-in reveal for major section blocks as they scroll into view
-   -------------------------------------------------------------------- */
+ 
 function initScrollReveal() {
     const targets = document.querySelectorAll(".section-block, .feature-card, .mini-stat-card");
     if (!targets.length || !("IntersectionObserver" in window)) return;
@@ -98,10 +81,7 @@ function initScrollReveal() {
 
     targets.forEach((el) => observer.observe(el));
 }
-
-/* --------------------------------------------------------------------
-   Auto-dismiss flash messages after a few seconds
-   -------------------------------------------------------------------- */
+ 
 function initAutoDismissAlerts() {
     const alerts = document.querySelectorAll(".alert");
     alerts.forEach((alert) => {
@@ -113,10 +93,7 @@ function initAutoDismissAlerts() {
         }, 6000);
     });
 }
-
-/* --------------------------------------------------------------------
-   PDF report download button (result page)
-   -------------------------------------------------------------------- */
+ 
 function initDownloadReportButton() {
     const btn = document.getElementById("downloadReportBtn");
     if (!btn) return;
@@ -124,10 +101,7 @@ function initDownloadReportButton() {
         window.location.href = "/report/download";
     });
 }
-
-/* --------------------------------------------------------------------
-   Shared Chart.js theme so every chart looks consistent
-   -------------------------------------------------------------------- */
+ 
 const CHART_COLORS = {
     blue: "#1768ac",
     blueBright: "#2ec4e6",
@@ -152,11 +126,7 @@ function baseChartOptions(overrides = {}) {
         },
         overrides
     );
-}
-
-/* --------------------------------------------------------------------
-   Result page: Attend vs No-Show probability doughnut
-   -------------------------------------------------------------------- */
+} 
 function initProbabilityChart() {
     const canvas = document.getElementById("probabilityChart");
     if (!canvas || typeof Chart === "undefined") return;
@@ -185,10 +155,7 @@ function initProbabilityChart() {
         },
     });
 }
-
-/* --------------------------------------------------------------------
-   Dashboard: pie, bar, and live trend line chart
-   -------------------------------------------------------------------- */
+ 
 function initDashboardCharts() {
     if (typeof Chart === "undefined") return;
 
@@ -261,10 +228,7 @@ function initDashboardCharts() {
             });
     }
 }
-
-/* --------------------------------------------------------------------
-   Analytics page: gender, age, disease, SMS-effect, monthly trend
-   -------------------------------------------------------------------- */
+ 
 function initAnalyticsCharts() {
     if (typeof Chart === "undefined") return;
 
@@ -351,10 +315,7 @@ function initAnalyticsCharts() {
         });
     }
 }
-
-/* --------------------------------------------------------------------
-   Model Comparison page: grouped bar chart across all four models
-   -------------------------------------------------------------------- */
+ 
 function initModelComparisonChart() {
     const canvas = document.getElementById("modelComparisonChart");
     if (!canvas || typeof Chart === "undefined") return;

@@ -1,17 +1,10 @@
--- ============================================================
--- Smart Hospital No-Show Prediction & Management System
--- SQLite Database Schema
--- ============================================================
-
--- Admin users who can log in to view dashboard/history/analytics
+ 
 CREATE TABLE IF NOT EXISTS admin (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
     created_at TEXT DEFAULT CURRENT_TIMESTAMP
-);
-
--- Every prediction made through the app is logged here
+); 
 CREATE TABLE IF NOT EXISTS prediction_history (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     patient_age INTEGER NOT NULL,
@@ -28,8 +21,7 @@ CREATE TABLE IF NOT EXISTS prediction_history (
     risk_level TEXT,                   -- 'Low Risk' / 'High Risk'
     created_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
-
--- Application-level event/error logs
+ 
 CREATE TABLE IF NOT EXISTS application_logs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     level TEXT NOT NULL,               -- INFO / WARNING / ERROR

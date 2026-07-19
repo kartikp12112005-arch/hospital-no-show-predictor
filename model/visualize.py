@@ -1,14 +1,3 @@
-"""
-Visualization & EDA module.
-
-Produces two kinds of output:
-1. Static PNG charts saved to static/images/eda/ — useful for the
-   notebooks/ EDA writeup and README screenshots.
-2. dataset_stats.json — precomputed aggregates (gender/age/disease
-   distribution, attendance rate, SMS effect, monthly trend) that the
-   Analytics page reads directly instead of recomputing from the raw
-   110k-row CSV on every request.
-"""
 
 import json
 import os
@@ -59,8 +48,7 @@ def compute_dataset_stats(clean_df: pd.DataFrame) -> dict:
     """
     df = clean_df.copy()
     df["waiting_days"] = (df["AppointmentDay"] - df["ScheduledDay"]).dt.days.clip(lower=0)
-    # Drop timezone info before converting to a monthly period to avoid
-    # silently losing precision warnings from pandas.
+    
     df["month"] = df["AppointmentDay"].dt.tz_localize(None).dt.to_period("M").astype(str)
 
     def attendance_rate_by(column: str) -> dict:

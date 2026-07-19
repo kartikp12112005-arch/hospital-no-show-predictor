@@ -1,8 +1,3 @@
-/* ==========================================================================
-   Smart Hospital No-Show Predictor — Custom Stylesheet
-   Theme: clinical blue & white, with a heartbeat/ECG signature motif
-   (built on top of Bootstrap 5's grid + utilities)
-   ========================================================================== */
 
 :root {
     /* ---- Color tokens ---- */
@@ -55,10 +50,7 @@ a { text-decoration: none; }
     outline: 2px solid var(--blue-bright);
     outline-offset: 2px;
 }
-
-/* ==========================================================================
-   Navbar
-   ========================================================================== */
+ 
 .app-navbar {
     background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(10px);
@@ -112,11 +104,7 @@ a { text-decoration: none; }
     color: #fff;
     transform: translateY(-2px);
     box-shadow: 0 10px 24px rgba(23, 104, 172, 0.36);
-}
-
-/* ==========================================================================
-   Breadcrumb bar
-   ========================================================================== */
+} 
 .breadcrumb-bar {
     background: var(--blue-mist);
     padding: 0.75rem 0;
@@ -178,8 +166,7 @@ a { text-decoration: none; }
     color: var(--blue-primary-dark);
 }
 .stat-label { font-size: 0.78rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.04em; }
-
-/* Heartbeat / ECG signature element behind the hero icon */
+ 
 .hero-visual {
     position: relative;
     width: 100%;
@@ -200,8 +187,7 @@ a { text-decoration: none; }
     mask-image: radial-gradient(circle, black 55%, transparent 85%);
     opacity: 0.7;
 }
-.hero-visual::after {
-    /* the animated ECG trace line, drawn as a repeating background stripe */
+.hero-visual::after { 
     content: "";
     position: absolute;
     left: 0;
@@ -234,10 +220,7 @@ a { text-decoration: none; }
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.06); }
 }
-
-/* ==========================================================================
-   Section scaffolding
-   ========================================================================== */
+ 
 .section-block { padding: 4.5rem 0; }
 .bg-soft { background: var(--blue-mist); }
 
@@ -258,9 +241,7 @@ a { text-decoration: none; }
 
 .checklist { list-style: none; padding: 0; margin-top: 1.5rem; }
 .checklist li { margin-bottom: 0.75rem; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 0.6rem; }
-.checklist li i { color: var(--safe-green); margin-top: 0.2rem; }
-
-/* Small stat tiles reused across About / Analytics */
+.checklist li i { color: var(--safe-green); margin-top: 0.2rem 
 .mini-stat-card {
     background: var(--white);
     border: 1px solid var(--blue-line);
@@ -274,10 +255,7 @@ a { text-decoration: none; }
 .mini-stat-card i { font-size: 1.6rem; color: var(--blue-primary); }
 .mini-stat-card h3 { font-size: 1.5rem; margin: 0.4rem 0 0.1rem; }
 .mini-stat-card p { color: var(--ink-soft); font-size: 0.85rem; margin: 0; }
-
-/* ==========================================================================
-   Feature cards
-   ========================================================================== */
+ 
 .feature-card {
     background: var(--white);
     border: 1px solid var(--blue-line);
@@ -305,10 +283,7 @@ a { text-decoration: none; }
 }
 .feature-card h5 { font-size: 1.1rem; margin-bottom: 0.5rem; }
 .feature-card p { color: var(--ink-soft); font-size: 0.92rem; margin: 0; }
-
-/* ==========================================================================
-   ML workflow row (a genuine sequence — numbered markers are earned here)
-   ========================================================================== */
+ 
 .workflow-row {
     display: flex;
     align-items: stretch;
@@ -359,10 +334,7 @@ a { text-decoration: none; }
     font-size: 1.2rem;
     flex: 0 0 auto;
 }
-
-/* ==========================================================================
-   Technology badges
-   ========================================================================== */
+ 
 .tech-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem; }
 .tech-badge {
     display: inline-flex;
@@ -379,10 +351,7 @@ a { text-decoration: none; }
 }
 .tech-badge:hover { border-color: var(--blue-primary); color: var(--blue-primary); transform: translateY(-2px); }
 .tech-badge i { color: var(--blue-primary); }
-
-/* ==========================================================================
-   CTA band
-   ========================================================================== */
+ 
 .cta-section {
     background: linear-gradient(135deg, var(--blue-primary) 0%, var(--blue-primary-dark) 100%);
     color: #fff;
@@ -390,10 +359,7 @@ a { text-decoration: none; }
 }
 .cta-section h2 { color: #fff; }
 .cta-section p { color: rgba(255,255,255,0.85); }
-
-/* ==========================================================================
-   Predict form
-   ========================================================================== */
+ 
 .form-card {
     background: var(--white);
     border: 1px solid var(--blue-line);
@@ -437,10 +403,7 @@ a { text-decoration: none; }
 
 #predictSubmitBtn.is-loading .btn-label { display: none; }
 #predictSubmitBtn:not(.is-loading) .btn-spinner { display: none; }
-
-/* ==========================================================================
-   Result page
-   ========================================================================== */
+ 
 .result-card {
     background: var(--white);
     border-radius: var(--radius-lg);
@@ -477,10 +440,7 @@ a { text-decoration: none; }
 }
 .recommendation-card h5 { font-size: 1rem; }
 .recommendation-card p { color: var(--ink-soft); margin: 0; font-size: 0.94rem; }
-
-/* ==========================================================================
-   Login
-   ========================================================================== */
+ 
 .login-card {
     background: var(--white);
     border: 1px solid var(--blue-line);
@@ -496,10 +456,7 @@ a { text-decoration: none; }
     font-size: 0.82rem;
     color: var(--ink-soft);
 }
-
-/* ==========================================================================
-   Dashboard / Analytics stat + chart cards
-   ========================================================================== */
+ 
 .stat-card {
     background: var(--white);
     border: 1px solid var(--blue-line);
@@ -547,10 +504,7 @@ a { text-decoration: none; }
 
 .search-bar .form-control { border-radius: 0; }
 .search-bar .input-group-text { background: var(--white); border-color: var(--blue-line); }
-
-/* ==========================================================================
-   About page
-   ========================================================================== */
+ 
 .about-card {
     background: var(--white);
     border: 1px solid var(--blue-line);
@@ -559,10 +513,7 @@ a { text-decoration: none; }
     height: 100%;
 }
 .about-card h5 { font-size: 1.05rem; }
-
-/* ==========================================================================
-   Footer
-   ========================================================================== */
+ 
 .app-footer {
     background: var(--blue-mist);
     border-top: 1px solid var(--blue-line);
@@ -572,16 +523,10 @@ a { text-decoration: none; }
 .footer-links li { margin-bottom: 0.4rem; }
 .footer-links a { color: var(--ink-soft); }
 .footer-links a:hover { color: var(--blue-primary); }
-
-/* ==========================================================================
-   Scroll-reveal (JS toggles .is-visible; CSS-only fallback stays visible)
-   ========================================================================== */
+ 
 .reveal-on-scroll { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
-
-/* ==========================================================================
-   Dark mode overrides
-   ========================================================================== */
+ 
 [data-bs-theme="dark"] {
     --ink: #eaf1fb;
     --ink-soft: #a9bdd6;
@@ -594,10 +539,7 @@ a { text-decoration: none; }
 [data-bs-theme="dark"] .hero-section { background: linear-gradient(180deg, #12233b 0%, #08182c 100%); }
 [data-bs-theme="dark"] .hero-icon { background: #0b1b30; }
 [data-bs-theme="dark"] .prob-box { background: #12233b; }
-
-/* ==========================================================================
-   Responsive tweaks
-   ========================================================================== */
+ 
 @media (max-width: 767.98px) {
     .section-block { padding: 3rem 0; }
     .hero-visual { height: 220px; }

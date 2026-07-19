@@ -1,16 +1,7 @@
-"""
-Feature engineering module.
 
-Derives the exact feature set the web form collects from the raw
-Kaggle columns, so training features and inference-time features are
-always perfectly aligned. This is the single source of truth for
-which fields the model expects, in which order.
-"""
 
 import pandas as pd
 
-# Order matters: utils/predictor.py must build feature vectors in
-# this exact order at inference time.
 FEATURE_COLUMNS = [
     "gender",
     "age",
@@ -26,20 +17,10 @@ TARGET_COLUMN = "no_show"
 
 
 def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Build the ML-ready feature dataframe from a cleaned raw dataframe.
-
-    Args:
-        df: Cleaned dataframe from model.data_cleaning.clean_dataset.
-
-    Returns:
-        A dataframe with FEATURE_COLUMNS + TARGET_COLUMN, ready for
-        train/test split.
-    """
+   
     df = df.copy()
 
-    # Waiting days = how long between booking and the actual appointment.
-    # A handful of rows have negative values (data-entry errors); clip to 0.
+    
     waiting_days = (df["AppointmentDay"] - df["ScheduledDay"]).dt.days
     waiting_days = waiting_days.clip(lower=0)
 
